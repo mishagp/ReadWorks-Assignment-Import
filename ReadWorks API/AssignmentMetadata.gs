@@ -1,17 +1,27 @@
 class ReadWorksAssignmentMetadata {
     constructor(data) {
-        this.wordCount = data['mm'];
+        this.wordCount = data['wordcount'];
         this.thumbnailUrl = data['img'];
         this.domains = data['s'];
         this.productType = this.parseProductType(data['pt']);
         this.textType = data['t'];
         this.lexileCodes = data['lc'];
-        this.grades = this.parseGradeLevels(data['g']);
+        if (this.productType == "Paired Text") {
+            var grades = [];
+            for (var key in data.articles) {
+                for (var i = 0; i < data.articles[key]['g'].length; i++) {
+                    grades.push(data.articles[key]['g'][i]);
+                }
+            }
+            this.parseGradeLevels(grades);
+        } else {
+            this.grades = this.parseGradeLevels(data['g']);
+        }
         this.title = data['title'];
     }
 
     parseGradeLevels(grades) {
-        var parsedGradeLevel = ""
+        var parsedGradeLevel = "";
         for (var i = 0; i < grades.length; i++) {
             switch (grades[i]) {
                 case "346":
@@ -23,7 +33,6 @@ class ReadWorksAssignmentMetadata {
                     break;
             }
         }
-        ;
         return parsedGradeLevel;
     }
 
@@ -33,10 +42,10 @@ class ReadWorksAssignmentMetadata {
             case "A":
                 parsedProductType = "Reading Passages";
                 break;
-            case "AD":
+            case "AAD":
                 parsedProductType = "Article-A-Day";
                 break;
-            case "AD":
+            case "P":
                 parsedProductType = "Paired Text";
                 break;
         }

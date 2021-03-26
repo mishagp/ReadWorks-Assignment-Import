@@ -1,5 +1,5 @@
 class ReadWorksClass {
-    constructor(data) {
+    constructor(data, teacher) {
         this.classCode = data['cc'];
         this.uid = data['uid'];
         this.createdAt = data['c'];
@@ -12,5 +12,6 @@ class ReadWorksClass {
         this.students = [];
         this.assignments = [];
         this.name = data['n'];
+        this.teacher = teacher;
     }
 }

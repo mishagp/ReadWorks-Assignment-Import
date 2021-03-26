@@ -1,5 +1,6 @@
 class ReadWorksAssignment {
-    constructor(data) {
+    constructor(data, rwClass) {
+        this.rwClass = rwClass;
         this.id = data['aid'];
         this.studentsInProgressCount = data['ka'];
         this.productID = data['p'];
@@ -9,6 +10,9 @@ class ReadWorksAssignment {
         this.owner = data['owner'];
         this.options = new ReadWorksAssignmentOptions(data['opts']);
         this.metadata = new ReadWorksAssignmentMetadata(data['pmd']);
+        if(this.metadata.productType=="Article-A-Day"){
+            this.dueDate = data['ed'];
+        }
         this.submittedAssignments = [];
     }
 }
