@@ -10,7 +10,7 @@ class ReadWorksAssignment {
         this.owner = data['owner'];
         this.options = new ReadWorksAssignmentOptions(data['opts']);
         this.metadata = new ReadWorksAssignmentMetadata(data['pmd']);
-        if(this.metadata.productType=="Article-A-Day"){
+        if (this.metadata.productType == "Article-A-Day") {
             this.dueDate = data['ed'];
         }
         this.submittedAssignments = [];
